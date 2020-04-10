@@ -16,8 +16,8 @@ app.get("/:width/:height", async (req, res, next) => {
 
     const dir = path.resolve(__dirname, "../static/images");
     const files = await fs.readdir(dir);
-    // TODO pick a random file
-    const filename = files[0];
+    const idx = Math.ceil(Math.random() * files.length - 1);
+    const filename = files[idx];
     pipeline(
       createReadStream(path.resolve(dir, filename)),
       sharp().resize(width, height),
