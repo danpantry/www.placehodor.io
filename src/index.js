@@ -15,6 +15,12 @@ app.get("/:width/:height", async (req, res, next) => {
   try {
     const height = parseInt(req.params.height, 10);
     const width = parseInt(req.params.width, 10);
+    // Storing files on this image is likely a mistake -
+    // It would mean a re-deploy every time we want to add a new one.
+    // Probably better to use S3.
+    // This would also enable us to precompute some common sizes ahead of time.
+    // Alternatively, a volume could work, and would also allow us to cache recent images.
+    // Really, though, we should monitor our usage before trying any of this.
     const dir = path.resolve(__dirname, "../static/images");
     const files = await fs.readdir(dir);
     const idx = Math.ceil(Math.random() * files.length - 1);
