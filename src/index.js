@@ -20,7 +20,7 @@ app.get("/:width/:height", async (req, res, next) => {
     const filename = files[idx];
     pipeline(
       createReadStream(path.resolve(dir, filename)),
-      sharp().resize(width, height),
+      sharp().resize(width, height).toFormat("webp"),
       res,
       (err) => {
         if (err != null) {
