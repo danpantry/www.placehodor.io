@@ -32,4 +32,11 @@ app.get("/:width/:height", async (req, res, next) => {
   }
 });
 
-app.listen(PORT, HOSTNAME);
+const server = app.listen(PORT, HOSTNAME);
+process.on("SIGTERM", () => {
+  server.close();
+});
+
+process.on("SIGINT", () => {
+  server.close();
+});
