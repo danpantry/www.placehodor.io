@@ -1,2 +1,2 @@
-bin/index.js: $(wildcard src/*.js)
+bin/index.js: $(wildcard src/*.js) .babelrc
 	yarn build
